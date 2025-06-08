@@ -4,6 +4,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SimpleRPG;
 
+enum Dir
+{
+  Left,
+  Right,
+  Up,
+  Down
+}
 public class Game1 : Game
 {
   private GraphicsDeviceManager _graphics;
@@ -18,6 +25,8 @@ public class Game1 : Game
   private Texture2D _background;
   private Texture2D _ball;
   private Texture2D _skull;
+
+  Player _player = new Player();
   public Game1()
   {
     _graphics = new GraphicsDeviceManager(this);
@@ -53,7 +62,7 @@ public class Game1 : Game
     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
       Exit();
 
-    // TODO: Add your update logic here
+    _player.Update(gameTime);
 
     base.Update(gameTime);
   }
@@ -64,6 +73,7 @@ public class Game1 : Game
 
     _spriteBatch.Begin();
     _spriteBatch.Draw(_background, new Vector2(-500, -500), Color.White);
+    _spriteBatch.Draw(_playerSprite, _player.Position, Color.White);
     _spriteBatch.End();
 
     base.Draw(gameTime);
