@@ -6,10 +6,10 @@ namespace SimpleRPG;
 
 enum Dir
 {
-  Left,
-  Right,
+  Down,
   Up,
-  Down
+  Left,
+  Right
 }
 public class Game1 : Game
 {
@@ -57,7 +57,11 @@ public class Game1 : Game
     _ball = Content.Load<Texture2D>("ball");
     _skull = Content.Load<Texture2D>("skull");
 
-    _player.animation = new SpriteAnimation(_walkDown, 4, 8);
+    _player.Animations[0] = new SpriteAnimation(_walkDown, 4, 8);
+    _player.Animations[1] = new SpriteAnimation(_walkUp, 4, 8);
+    _player.Animations[2] = new SpriteAnimation(_walkLeft, 4, 8);
+    _player.Animations[3] = new SpriteAnimation(_walkRight, 4, 8);
+    _player.animation = _player.Animations[0];
   }
 
   protected override void Update(GameTime gameTime)

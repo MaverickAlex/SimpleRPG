@@ -12,6 +12,8 @@ public class Player
   private bool _isMoving = false;
   public SpriteAnimation animation;
 
+  public SpriteAnimation[] Animations = new SpriteAnimation[4];
+
   public Vector2 Position => _position;
 
   public void SetX(int x)
@@ -69,6 +71,8 @@ public class Player
           throw new ArgumentOutOfRangeException();
       }
     }
+
+    animation = Animations[(int)_direction];
     animation.Position = new Vector2(_position.X - 48, _position.Y - 48);
     animation.Update(gameTime);
   }
