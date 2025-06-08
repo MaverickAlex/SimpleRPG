@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using Comora;
 namespace SimpleRPG;
 
 enum Dir
@@ -27,6 +27,7 @@ public class Game1 : Game
   private Texture2D _skull;
 
   Player _player = new Player();
+  private Camera _camera;
   public Game1()
   {
     _graphics = new GraphicsDeviceManager(this);
@@ -39,7 +40,7 @@ public class Game1 : Game
     _graphics.PreferredBackBufferWidth = 1280;
     _graphics.PreferredBackBufferHeight = 720;
     _graphics.ApplyChanges();
-
+    _camera = new Camera(_graphics.GraphicsDevice);
     base.Initialize();
   }
 
@@ -63,7 +64,8 @@ public class Game1 : Game
       Exit();
 
     _player.Update(gameTime);
-
+    _camera.Position = _player.Position;
+    _camera.Update(gameTime);
     base.Update(gameTime);
   }
 
@@ -71,7 +73,7 @@ public class Game1 : Game
   {
     GraphicsDevice.Clear(Color.CornflowerBlue);
 
-    _spriteBatch.Begin();
+    _spriteBatch.Begin(_camera);
     _spriteBatch.Draw(_background, new Vector2(-500, -500), Color.White);
     _spriteBatch.Draw(_playerSprite, _player.Position, Color.White);
     _spriteBatch.End();
