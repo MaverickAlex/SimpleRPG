@@ -10,6 +10,7 @@ public class Player
   private int _speed = 300;
   private Dir _direction = Dir.Down;
   private bool _isMoving = false;
+  public SpriteAnimation animation;
 
   public Vector2 Position => _position;
 
@@ -68,7 +69,7 @@ public class Player
           throw new ArgumentOutOfRangeException();
       }
     }
-
-
+    animation.Position = new Vector2(_position.X - 48, _position.Y - 48);
+    animation.Update(gameTime);
   }
 }

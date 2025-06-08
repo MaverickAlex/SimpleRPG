@@ -56,6 +56,8 @@ public class Game1 : Game
     _background = Content.Load<Texture2D>("background");
     _ball = Content.Load<Texture2D>("ball");
     _skull = Content.Load<Texture2D>("skull");
+
+    _player.animation = new SpriteAnimation(_walkDown, 4, 8);
   }
 
   protected override void Update(GameTime gameTime)
@@ -75,7 +77,7 @@ public class Game1 : Game
 
     _spriteBatch.Begin(_camera);
     _spriteBatch.Draw(_background, new Vector2(-500, -500), Color.White);
-    _spriteBatch.Draw(_playerSprite, _player.Position, Color.White);
+    _player.animation.Draw(_spriteBatch);
     _spriteBatch.End();
 
     base.Draw(gameTime);
