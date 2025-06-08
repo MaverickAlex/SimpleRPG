@@ -11,6 +11,7 @@ public class Player
   private Dir _direction = Dir.Down;
   private bool _isMoving = false;
   public SpriteAnimation animation;
+  private KeyboardState _keyboardStateOld = Keyboard.GetState();
 
   public SpriteAnimation[] Animations = new SpriteAnimation[4];
 
@@ -86,5 +87,10 @@ public class Player
     {
       animation.setFrame(1);
     }
+    if (_keyboardStateOld.IsKeyUp(Keys.Space) && keyboardState.IsKeyDown(Keys.Space))
+    {
+      Projectile.Projectiles.Add(new Projectile(_position, _direction));
+    }
+    _keyboardStateOld = keyboardState;
   }
 }

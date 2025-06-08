@@ -2,9 +2,11 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Comora;
+using System.Collections.Generic;
+
 namespace SimpleRPG;
 
-enum Dir
+public enum Dir
 {
   Down,
   Up,
@@ -27,6 +29,7 @@ public class Game1 : Game
   private Texture2D _skull;
 
   Player _player = new Player();
+
   private Camera _camera;
   public Game1()
   {
@@ -72,6 +75,11 @@ public class Game1 : Game
     _player.Update(gameTime);
     _camera.Position = _player.Position;
     _camera.Update(gameTime);
+
+    foreach (Projectile projectile in Projectile.Projectiles)
+    {
+      projectile.Update(gameTime);
+    }
     base.Update(gameTime);
   }
 
@@ -81,6 +89,11 @@ public class Game1 : Game
 
     _spriteBatch.Begin(_camera);
     _spriteBatch.Draw(_background, new Vector2(-500, -500), Color.White);
+
+    foreach (Projectile projectile in Projectile.Projectiles)
+    {
+      _spriteBatch.Draw(_ball, new Vector2(projectile.Position.X - 48, projectile.Position.Y - 48), Color.White);
+    }
     _player.animation.Draw(_spriteBatch);
     _spriteBatch.End();
 
