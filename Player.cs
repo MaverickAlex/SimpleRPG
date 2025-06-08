@@ -55,9 +55,11 @@ public class Player
       _isMoving = true;
     }
 
+    if(keyboardState.IsKeyDown(Keys.Space))
+      _isMoving=false;
+
     if (_isMoving)
     {
-
       switch (_direction)
       {
         case Dir.Left:
@@ -79,7 +81,11 @@ public class Player
 
     animation = Animations[(int)_direction];
     animation.Position = new Vector2(_position.X - 48, _position.Y - 48);
-    if (_isMoving)
+    if (keyboardState.IsKeyDown(Keys.Space))
+    {
+      animation.setFrame(0);
+    }
+    else if (_isMoving)
     {
       animation.Update(gameTime);
     }
@@ -87,9 +93,11 @@ public class Player
     {
       animation.setFrame(1);
     }
+
     if (_keyboardStateOld.IsKeyUp(Keys.Space) && keyboardState.IsKeyDown(Keys.Space))
     {
       Projectile.Projectiles.Add(new Projectile(_position, _direction));
+
     }
     _keyboardStateOld = keyboardState;
   }
