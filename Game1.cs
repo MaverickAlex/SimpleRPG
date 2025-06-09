@@ -3,9 +3,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Comora;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace SimpleRPG;
 
+public static class MySounds
+{
+  public static SoundEffect ProjectileSound;
+  public static Song Music;
+}
 public enum Dir
 {
   Down,
@@ -60,6 +66,9 @@ public class Game1 : Game
     _ball = Content.Load<Texture2D>("ball");
     _skull = Content.Load<Texture2D>("skull");
 
+    MySounds.ProjectileSound = Content.Load<SoundEffect>("Sounds/blip");
+    MySounds.Music = Content.Load<Song>("Sounds/nature");
+    MediaPlayer.Play(MySounds.Music);
     _player.Animations[0] = new SpriteAnimation(_walkDown, 4, 8);
     _player.Animations[1] = new SpriteAnimation(_walkUp, 4, 8);
     _player.Animations[2] = new SpriteAnimation(_walkLeft, 4, 8);

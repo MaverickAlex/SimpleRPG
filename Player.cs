@@ -106,7 +106,7 @@ public class Player
     if (_keyboardStateOld.IsKeyUp(Keys.Space) && keyboardState.IsKeyDown(Keys.Space))
     {
       Projectile.Projectiles.Add(new Projectile(_position, _direction));
-
+      MySounds.ProjectileSound.Play(1f,0.5f,0f);
     }
     _keyboardStateOld = keyboardState;
   }
