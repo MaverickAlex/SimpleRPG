@@ -17,6 +17,8 @@ public class Player
 
   public Vector2 Position => _position;
 
+  public bool Dead { get; set; } = false;
+
   public void SetX(int x)
   {
     _position.X = x;
@@ -57,6 +59,9 @@ public class Player
 
     if(keyboardState.IsKeyDown(Keys.Space))
       _isMoving=false;
+
+    if (Dead)
+      _isMoving = false;
 
     if (_isMoving)
     {

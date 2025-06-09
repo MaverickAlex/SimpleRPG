@@ -73,7 +73,8 @@ public class Game1 : Game
       Exit();
 
     _player.Update(gameTime);
-    Controller.Update(gameTime, _skull);
+    if(!_player.Dead)
+      Controller.Update(gameTime, _skull);
     _camera.Position = _player.Position;
     _camera.Update(gameTime);
 
@@ -84,7 +85,12 @@ public class Game1 : Game
 
     foreach (Enemy enemy in Enemy.Enemies)
     {
-      enemy.Update(gameTime, _player.Position);
+      enemy.Update(gameTime, _player.Position, _player.Dead);
+      int sum = 32 + enemy._radius;
+      if (Vector2.Distance(_player.Position, enemy.Position) < sum)
+      {
+        _player.Dead = true;
+      }
     }
 
     foreach (Projectile projectile in Projectile.Projectiles)
@@ -120,8 +126,8 @@ public class Game1 : Game
     {
       _spriteBatch.Draw(_ball, new Vector2(projectile.Position.X - 48, projectile.Position.Y - 48), Color.White);
     }
-
-    _player.animation.Draw(_spriteBatch);
+    if(!_player.Dead)
+      _player.animation.Draw(_spriteBatch);
     _spriteBatch.End();
 
     base.Draw(gameTime);

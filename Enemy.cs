@@ -21,13 +21,17 @@ public class Enemy
   }
   public Vector2 Position => _position;
 
-  public void Update(GameTime gameTime, Vector2 playerPosition)
+  public void Update(GameTime gameTime, Vector2 playerPosition, bool playerIsDead )
   {
     animation.Update(gameTime);
     animation.Position = new Vector2(_position.X - 48, _position.Y - 66);
-    Vector2 moveDir = playerPosition - _position;
-    moveDir.Normalize();
-    _position += moveDir * _speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+    if (!playerIsDead)
+    {
+      Vector2 moveDir = playerPosition - _position;
+      moveDir.Normalize();
+      _position += moveDir * _speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+    }
+
   }
 
 
