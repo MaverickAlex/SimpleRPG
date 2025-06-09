@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Comora;
-using System.Collections.Generic;
+using Microsoft.Xna.Framework.Audio;
 
 namespace SimpleRPG;
 
