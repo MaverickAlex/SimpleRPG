@@ -17,6 +17,7 @@ public class Projectile
     _position = position;
     _direction = direction;
   }
+  public bool Collided { get; set; } = false;
 
   public Vector2 Position => _position;
 

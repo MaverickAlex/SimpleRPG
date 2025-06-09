@@ -87,6 +87,21 @@ public class Game1 : Game
     {
       enemy.Update(gameTime, _player.Position);
     }
+
+    foreach (Projectile projectile in Projectile.Projectiles)
+    {
+      foreach (Enemy enemy in Enemy.Enemies)
+      {
+        int sum = projectile._radius + enemy._radius;
+        if (Vector2.Distance(projectile.Position, enemy.Position) < sum)
+        {
+          projectile.Collided = true;
+          enemy.IsDead = true;
+        }
+      }
+    }
+    Projectile.Projectiles.RemoveAll(x => x.Collided);
+    Enemy.Enemies.RemoveAll(x => x.IsDead);
     base.Update(gameTime);
   }
 

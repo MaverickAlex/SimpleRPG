@@ -9,6 +9,9 @@ public class Enemy
   public static List<Enemy> Enemies = [];
   private Vector2 _position = Vector2.Zero;
   int _speed = 150;
+  public int _radius = 30;
+
+  public bool IsDead { get; set; } = false;
 
   public SpriteAnimation animation;
   public Enemy(Vector2 position, Texture2D spriteSheet)
