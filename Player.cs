@@ -63,16 +63,20 @@ public class Player
       switch (_direction)
       {
         case Dir.Left:
-          _position.X -= _speed * dt;
+          if (_position.X > 225)
+            _position.X -= _speed * dt;
           break;
         case Dir.Right:
-          _position.X += _speed * dt;
+          if( _position.X < 1275)
+            _position.X += _speed * dt;
           break;
         case Dir.Up:
-          _position.Y -= _speed * dt;
+          if( _position.Y > 200)
+            _position.Y -= _speed * dt;
           break;
         case Dir.Down:
-          _position.Y += _speed * dt;
+          if( _position.Y < 1250)
+            _position.Y += _speed * dt;
           break;
         default:
           throw new ArgumentOutOfRangeException();
