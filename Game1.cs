@@ -65,8 +65,6 @@ public class Game1 : Game
     _player.Animations[2] = new SpriteAnimation(_walkLeft, 4, 8);
     _player.Animations[3] = new SpriteAnimation(_walkRight, 4, 8);
     _player.animation = _player.Animations[0];
-    Enemy.Enemies.Add(new Enemy(new Vector2(100, 100), _skull));
-    Enemy.Enemies.Add(new Enemy(new Vector2(700, 200), _skull));
   }
 
   protected override void Update(GameTime gameTime)
@@ -75,6 +73,7 @@ public class Game1 : Game
       Exit();
 
     _player.Update(gameTime);
+    Controller.Update(gameTime, _skull);
     _camera.Position = _player.Position;
     _camera.Update(gameTime);
 
@@ -102,6 +101,7 @@ public class Game1 : Game
     }
     Projectile.Projectiles.RemoveAll(x => x.Collided);
     Enemy.Enemies.RemoveAll(x => x.IsDead);
+
     base.Update(gameTime);
   }
 
