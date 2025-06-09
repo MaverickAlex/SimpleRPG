@@ -65,6 +65,8 @@ public class Game1 : Game
     _player.Animations[2] = new SpriteAnimation(_walkLeft, 4, 8);
     _player.Animations[3] = new SpriteAnimation(_walkRight, 4, 8);
     _player.animation = _player.Animations[0];
+    Enemy.Enemies.Add(new Enemy(new Vector2(100, 100), _skull));
+    Enemy.Enemies.Add(new Enemy(new Vector2(700, 200), _skull));
   }
 
   protected override void Update(GameTime gameTime)
@@ -80,6 +82,11 @@ public class Game1 : Game
     {
       projectile.Update(gameTime);
     }
+
+    foreach (Enemy enemy in Enemy.Enemies)
+    {
+      enemy.Update(gameTime, _player.Position);
+    }
     base.Update(gameTime);
   }
 
@@ -90,10 +97,15 @@ public class Game1 : Game
     _spriteBatch.Begin(_camera);
     _spriteBatch.Draw(_background, new Vector2(-500, -500), Color.White);
 
+    foreach (Enemy enemy in Enemy.Enemies)
+    {
+      enemy.animation.Draw(_spriteBatch);
+    }
     foreach (Projectile projectile in Projectile.Projectiles)
     {
       _spriteBatch.Draw(_ball, new Vector2(projectile.Position.X - 48, projectile.Position.Y - 48), Color.White);
     }
+
     _player.animation.Draw(_spriteBatch);
     _spriteBatch.End();
 
